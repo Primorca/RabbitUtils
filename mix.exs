@@ -28,7 +28,8 @@ defmodule RabbitUtils.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:amqp, "~> 1.0"}
+      {:amqp, "~> 1.0"},
+      {:gproc, "~> 0.8.0"}
     ]
   end
 end
