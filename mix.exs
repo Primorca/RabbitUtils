@@ -29,7 +29,8 @@ defmodule RabbitUtils.MixProject do
   defp deps do
     [
       {:amqp, "~> 1.0"},
-      {:gproc, "~> 0.8.0"}
+      {:gproc, "~> 0.8.0"},
+      {:ranch_proxy_protocol, "~>2.0", override: true}
     ]
   end
 end
