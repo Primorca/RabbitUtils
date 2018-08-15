@@ -2,8 +2,8 @@ defmodule RabbitUtils.RabbitChannelSupervisor do
   use DynamicSupervisor
   require Logger
 
-  def start_link do
-    DynamicSupervisor.start_link(__MODULE__, nil, name: __MODULE__)
+  def start_link(arg \\ nil) do
+    DynamicSupervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
 
   @impl true
