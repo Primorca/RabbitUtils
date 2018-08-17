@@ -29,6 +29,14 @@ defmodule RabbitUtils.RabbitChannel do
         GenServer.call(__MODULE__.via_tuple(name), {:declare_queue, queue_name})
       end
 
+      def declare_exchange(name, exchange_name) do
+        GenServer.call(__MODULE__.via_tuple(name), {:declare_exchange, exchange_name})
+      end
+
+      def bind_queue_to_exchange(name, queue_name, exchange_name) do
+        GenServer.call(__MODULE__.via_tuple(name), {:bind_queue_to_exchange, queue_name, exchange_name})
+      end
+
 
       def publish_message(name, exchange_name, queue_name, payload) do
         GenServer.call(__MODULE__.via_tuple(name), {:basic_publish, exchange_name, queue_name, payload})
