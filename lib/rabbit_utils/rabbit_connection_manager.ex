@@ -3,8 +3,8 @@ defmodule RabbitUtils.RabbitConnectionManager do
   use AMQP
   require Logger
 
-  def start_link do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  def start_link(args \\ []) do
+    GenServer.start_link(__MODULE__, args, name: __MODULE__)
   end
 
   def get_state() do
