@@ -29,6 +29,10 @@ defmodule RabbitUtils.RabbitChannel do
         GenServer.call(__MODULE__.via_tuple(name), {:declare_queue, queue_name})
       end
 
+      def declare_queue(name, queue_name, is_durable, args) do
+        GenServer.call(__MODULE__.via_tuple(name, {:declare_queue, queue_name, is_durable, args}))
+      end
+
       def declare_exchange(name, exchange_name) do
         GenServer.call(__MODULE__.via_tuple(name), {:declare_exchange, exchange_name})
       end
@@ -50,6 +54,12 @@ defmodule RabbitUtils.RabbitChannel do
       @impl true
       def handle_call({:declare_queue, queue_name}, _from, %{:channel => channel} = state) do
         Queue.declare(channel, queue_name)
+        {:reply, :ok, state}
+      end
+
+      @impl true
+      def handle_call({:declare_queue, queue_name, is_durable, args}, _from, %{:channel => channel} = state) do
+        Queue.declare(channel, queue_name, durable: is_durable, arguments: args)
         {:reply, :ok, state}
       end
 
